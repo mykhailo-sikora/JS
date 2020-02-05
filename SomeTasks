@@ -31,7 +31,7 @@ const main = () => {
 
 main();
 
-2.
+2.____________________________________________
 Recursion functions
 
 let arr = [
@@ -56,3 +56,18 @@ function recursion(a, i) {
 }
 
 recursion(arr, 2);
+
+3.____________________________________________
+find palinfrom
+let strings = ["abc", "aba", "iiffii", "bgd", "ADDA"];
+
+strings.forEach(string => {
+  let reversed = "";
+  for (let i = string.length - 1; i >= 0; i--) {
+    reversed += string[i];
+  }
+
+  if (reversed === string) {
+    console.log(`${string} is palindrom`);
+  }
+});
