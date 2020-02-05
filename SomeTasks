@@ -1,5 +1,5 @@
 /*
-
+1.
 Given an array of integers, return a new array such that each element at index i of the new array 
 is the product of all the numbers in the original array except the one at i.
 
@@ -30,3 +30,29 @@ const main = () => {
 };
 
 main();
+
+2.
+Recursion functions
+
+let arr = [
+  1,
+  2,
+  4,
+  [1111, 222, 333],
+  [444, { name: "ivan", surname: "Krivoxr0" }, true, 555],
+  5,
+  6
+];
+function recursion(a, i) {
+  if (i < a.length) {
+    if (Array.isArray(a[i])) {
+      recursion(a[i], 0);
+    } else {
+      console.log(a[i]);
+    }
+    i++;
+    recursion(a, i);
+  }
+}
+
+recursion(arr, 2);
