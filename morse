@@ -1,0 +1,66 @@
+const txt =
+  "---.. T---.. -.... T..---   R--------.. ...-- E----- ----.   R--------.. R....------ E.--.- .----   R......---- -.... .---- -....";
+
+const morze = [
+  "-----",
+  ".----",
+  "..---",
+  "...--",
+  "....-",
+  ".....",
+  "-....",
+  "--...",
+  "---..",
+  "----.",
+];
+
+function decoder(codeMassege) {
+  const quartetРairSplit = codeMassege.split("   ");
+  let mainStr = "";
+
+  for (let i = 0; i < quartetРairSplit.length; i++) { // quartetРairSplit -> [ pair1, pair2, pair3, pair4 ]
+    const pareSplit = quartetРairSplit[i].split(" ");
+
+    for (let j = 0; j < pareSplit.length; j++) { // pareSplit -> [ [pair1.number1], [pair1.number2], [pair1.number3], [pair1.number4] ]
+      if (pareSplit[j].includes("T")) {
+        let reversed = pareSplit[j].split("").reverse().splice(0, 5).join("");
+
+        mainStr += decoderNumbers(reversed);
+      } else if (pareSplit[j].includes("R")) {
+        let customValue = pareSplit[j].split("");
+        let str = "";
+
+        for (let y = 1; y < customValue.length; y += 2) {
+          str += customValue[y];
+        }
+
+        mainStr += decoderNumbers(str);
+      } else if (pareSplit[j].includes("E")) {
+        let customValue = pareSplit[j].split("").splice(1, 5);
+        let temp = customValue[0];
+
+        customValue[0] = customValue[customValue.length - 1];
+        customValue[customValue.length - 1] = temp;
+
+        mainStr += decoderNumbers(customValue.join(""));
+      } else {
+        mainStr += decoderNumbers(pareSplit[j]);
+      }
+    }
+
+    mainStr += " ";
+  }
+
+  return mainStr;
+}
+
+let answer = decoder(txt);
+console.log(answer);
+
+function decoderNumbers(cipher) {
+  for (let number = 0; number < morze.length; number++) {
+    if (cipher === morze[number]) {
+      return number;
+    }
+  }
+}
